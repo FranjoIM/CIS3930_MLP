@@ -16,9 +16,6 @@ export OMP_NUM_THREADS=$N_THREADS
 # Assign paths to variable names
 WD="..."
 ```
-
-## Prepare Genetic Data
-
 ```bash
 # Create holding directory
 mkdir -p CSI
