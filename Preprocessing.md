@@ -73,7 +73,7 @@ R
 ########################
 
 # Set working directory
-setwd("/blue/carolmathews/njofrica/ABCD_nOCD/WorkDir")
+setwd("...")
 
 # Load necessary libraries
 library(tidyverse)
