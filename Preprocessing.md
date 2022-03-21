@@ -168,7 +168,7 @@ CODE <- select(GENt, SampleID)
 SNP <- select(GEN, SampleID)
 colnames(SNP) <- "RSID"
 CODE$Dummy <- paste0(stri_rand_strings(8701, 4, '[A-Z]'), 
-                      stri_rand_strings(8701, 6,'[0-9]'))
+    stri_rand_strings(8701, 6,'[0-9]'))
 SNP$Dummy <- paste0("rs", stri_rand_strings(5654, 10,'[0-9]'))
 GEN_Dummy <- CODE %>%
     left_join(GENt, by=c("SampleID"="SampleID")) %>%
