@@ -26,10 +26,22 @@ A total of 6 processed data sets were defined for all samples after processing t
 6) Task FMRI
 ```
 
-# Methods and Machine Learning Models:
+# Machine Learning Model:
+## Method
 We built 6 different kernels based on these datasets categories and are combined using weighted probabilistic accuracy 
 kernel to make prediction on final test data-set.
 We trained each kernel using Logistic Regression model with elastic net as the penalty for every batch.
+## Support Method
+We compared model performance using Cohen’s kappa score to Cohen’s kappa scores 
+reported in psychiatry and psychiatric epidemiology literature.
+## Success Measurement
+The aim of this project is to develop a machine learning model to classify individuals 
+with OCD status. In order to measure our success, we have utilized confusion-matrix 
+based assessments like accuracy, specificity and sensitivity. At the baseline, we 
+expect accuracy of 0.5, sensitivity of 0.5, and specificity of 0.94, assuming prevalence of 
+0.5.
+
+
 # Languages and Tools used
 * R-language for data preprocessing and cleaning the data.
 * Machine learning Model: Logistic Regression, Elastic Net
