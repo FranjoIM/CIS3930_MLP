@@ -1816,3 +1816,72 @@ rm ${WD}/0504/*imputed.filtered.vcf.gz
 rm ${WD}/0504/*.imputed.vcf.gz
 rm ${WD}/0503/*.imputed.vcf.gz
 ```
+
+### Preprocess data
+```bash
+# Load UFRC module and begin a session
+module load ufrc
+srundev \
+  --account=carolmathews \
+  --qos=carolmathews \
+  --time=06:00:00 \
+  --mem=15G \
+  --cpus-per-task=2 \
+  --ntasks=1
+
+export MKL_NUM_THREADS=$N_THREADS
+export NUMEXPR_NUM_THREADS=$N_THREADS
+export OMP_NUM_THREADS=$N_THREADS
+
+# Assign paths to variable names
+WD="..."
+```
+```bash
+# Create holding directory
+mkdir -p CSI
+cd ${WD}/CSI
+
+# List files to stitch
+ls ${WD}/0504/ABCD.chr*.imputed.filtered.sorted.bcf.gz > \
+    ${WD}/CSI/Chunks.txt
+
+# Load in BCFtools 
+module load bcftools/1.13
+
+# Concatonate files 
+bcftools concat \
+    --file-list ${WD}/CSI/Chunks.txt \
+    --output-type z \
+    --threads 2 \
+    --output ${WD}/CSI/ABCD.vcf.gz
+
+# Filter variants to keep
+cd ${WD}/CSI
+
+awk 'NR == 1 || $9 < 0.005' ${WD}/1002/ocd_aug2017 | cut -f2 | awk 'NR>1' >  ${WD}/CSI/OCD_SigHit
+
+bcftools view \
+    --output ${WD}/CSI/ABCDFilt.vcf.gz \
+    --output-type z \
+    --threads 2 \
+    --include ID==@OCD_SigHit \
+    ${WD}/CSI/ABCD.vcf.gz
+
+bcftools view \
+    --output ${WD}/CSI/ABCDFinal.vcf \
+    --output-type v \
+    --threads 2 \
+    --include "INFO>0.9 & AF>=0.005 & AF<=0.995" \
+    ${WD}/CSI/ABCDFilt.vcf.gz
+
+bcftools query \
+    --format '%ID\t[\t%DS]\n' \
+    --print-header \
+    ${WD}/CSI/ABCDFinal.vcf > \
+    ${WD}/CSI/DosageMatrix
+
+bcftools query \
+    -list-samples \
+    ${WD}/CSI/ABCDFinal.vcf > \
+    ${WD}/CSI/SampleIDs
+```
