@@ -1,5 +1,9 @@
 library(tidyverse)
 
+#Figure 6: Test set analysis of kernels and final model. Accuracy and precision 
+#(A) and sensitivity and specificity 
+#(B) analysis of individual kernels and total model using test-set data
+
 # Kernel-wise analysis
 DFA <- data.frame(
   KERNEL = rep(c("Total", "Phenotype", "sMRI", "dMRI", "rsfMRI", "tsfMRI", "Genotype"),2),
