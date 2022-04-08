@@ -1,4 +1,6 @@
-# Figure 1
+# Figure 1: GWAS p-value simulation P-value deterioration curves per minor-allele frequency bins (0.1, 0.2, 0.225, 0.25, 0.275, 0.3), plotted against rates of phenotype misclassifications. 
+#A: P-value deterioration as a function of misclassified case status. 
+#B: P-value deterioration as a function of misclassified control status
 
 library(tidyverse)
 
