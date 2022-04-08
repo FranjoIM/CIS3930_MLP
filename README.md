@@ -47,7 +47,7 @@ expect accuracy of 0.5, sensitivity of 0.5, and specificity of 0.94, assuming pr
 * Machine learning Model: Logistic Regression, Elastic Net
 * Python and Scikit learn used for computation and development of model.
 
-#Results
+# Results
 Performance of each kernel in terms of accuracy has been visually represented. Phenotype kernel vastly outperformed all other kernels in terms of accuracy. Additionally, plots of receiver operative curves and precision-recall curves are shown for each individual kernel. Based on AUC metrics and F1 scores, we can see that phenotype kernel outperforms all other kernels. The kernels based on imaging and genetic data performed similarly, very close to expected baseline performance.
 
 
